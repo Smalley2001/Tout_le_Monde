@@ -149,7 +149,25 @@ on where the events are relative to their location.
 ### [BONUS] Interactive Prototype
 
 ## Schema 
-[This section will be completed in Unit 9]
+User class has following attributes:
+    * Object ID (String)
+    * updatedAt (Date)
+    * createdAt (Date)
+    * username (String)
+    * password (String)
+    
+Event class has following attributes:
+    * Object ID (String)
+    * updatedAt (Date)
+    * createdAt (Date)
+    * Host      (Pointer to User object)
+    * Campaign  (String)
+    * Description (String)
+    * Location    (String)
+    * Max_Participants (Number)
+    * Image            (File)
+    * Canceled         (boolean)
+    
 ### Models
 [Add table of models]
 ### Networking
