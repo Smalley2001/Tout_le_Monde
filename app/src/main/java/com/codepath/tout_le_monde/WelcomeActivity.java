@@ -23,7 +23,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                goLoginActivity();
+                goRegistrationActivity();
 
             }
         });
@@ -31,6 +31,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void goLoginActivity() {
         Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    private void goRegistrationActivity() {
+        Intent i = new Intent(this, RegistrationActivity.class);
         startActivity(i);
         finish();
     }

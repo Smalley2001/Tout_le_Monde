@@ -23,15 +23,10 @@
         android:textStyle="bold"/>
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="129dp"
-        android:layout_marginTop="284dp"
-        android:src="@drawable/fight_today"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@drawable/placeholder" />
 
     <Button
         android:id="@+id/btnStart"

@@ -9,7 +9,7 @@
     tools:context=".LoginActivity">
 
     <ImageView
-        android:id="@+id/login_placeholder"
+        android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:src="@drawable/placeholder" />
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="username"/>
+        android:hint=" Enter a username"/>
 
     <EditText
         android:id="@+id/etPassword"
@@ -27,16 +27,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
-        android:hint="password"
+        android:hint="Enter a password"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnSubmitUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:backgroundTint="#458eff"
-        android:text="Login" />
+        android:text="Submit" />
 
 
 </LinearLayout>
