@@ -1,6 +1,15 @@
 plugins {
     id 'com.android.application'
+
+    //For storing API Key
+    //id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+
 }
+
+//Followed steps on how to hide an API key from Youtube
+// Link: https://www.youtube.com/watch?v=4xczNJVHW40
+//def API_KEY = '"' + ApiKey + '"' ?: '"Api key not found"'
+//def STRING = 'String'
 
 android {
     compileSdkVersion 30
@@ -14,6 +23,12 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //Followed steps to try and hide API Key from Youtube link
+        // Link: https://www.youtube.com/watch?v=4xczNJVHW40
+//        each {type ->
+//            type.buildConfigField STRING, 'ApiKey', API_KEY
+//        }
     }
 
     buildTypes {
@@ -40,4 +55,9 @@ dependencies {
     //Dependency for Parse
     implementation "com.github.parse-community.Parse-SDK-Android:parse:1.18.5"
 
+    //Google Play Services
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    //Google Maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
 }
