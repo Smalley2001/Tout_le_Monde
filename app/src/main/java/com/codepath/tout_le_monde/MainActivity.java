@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean isServicesOK() {
+
+        //This function ensures that the User's client is compatible to
+        //allow Google Play Services
         Log.d(TAG, "isServicesOK: checking google services version");
 
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
@@ -75,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goMapsActivity() {
+
+        // This function redirects to the Google Map Activity
+        // if button clicked
+
         btnGoMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
