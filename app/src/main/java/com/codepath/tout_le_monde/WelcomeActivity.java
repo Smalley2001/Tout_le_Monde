@@ -23,7 +23,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                goRegistrationActivity();
+                goLoginActivity();
 
             }
         });
