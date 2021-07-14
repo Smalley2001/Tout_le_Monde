@@ -31,8 +31,11 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +81,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
     //widgets
     private EditText mSearchText;
+    private ImageView mGps;
 
     // mLocationCallback is a public variable for getting the location
     //This is because we want to already have a location stored so when
@@ -95,7 +99,8 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
                 if (location != null) {
                     Log.i(TAG, location.toString());
                     //Move camera to my location
-                    moveCamera(new LatLng(location.getLatitude(), location.getLongitude()), DEFAULT_ZOOM);
+                    moveCamera(new LatLng(location.getLatitude(), location.getLongitude()),
+                            DEFAULT_ZOOM, "My Location");
 
                     //Must explicitly ask for permission in order to setMyLocationEnabled
                     if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -127,6 +132,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
         setContentView(R.layout.activity_google_maps);
 
         mSearchText = findViewById(R.id.input_search);
+        mGps = findViewById(R.id.ic_gps);
 
         getLocationPermission();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -207,7 +213,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
             }
         }
 
-        // If we dont' have permission for FINE Location then we must ask for it
+        // If we don't have permission for FINE Location then we must ask for it
         else {
             ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
 
@@ -215,22 +221,39 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
     }
 
+    //This function overrides the enter key when the user tries to submit a query on the
+    //Google Map. Also has onclick listener for when user wants to return to their location
+    //on the Map
     private void init() {
 
         Log.d(TAG, "init: intializiing");
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE
-                || event.getAction() == KeyEvent.ACTION_DOWN || event.getAction() == KeyEvent.KEYCODE_ENTER) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE
+                        || event.getAction() == KeyEvent.ACTION_DOWN || event.getAction() == KeyEvent.KEYCODE_ENTER) {
 
                     //execute our method for searching
                     geoLocate();
 
                 }
+                hideSoftKeyboard();
                 return false;
             }
         });
+
+        //Set onClick listener for when user wants to return to their current location on the map
+        mGps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onMapReady(mMap);
+
+            }
+        });
+
+        //Hides the soft keyboard
+        hideSoftKeyboard();
     }
 
     public void initMap() {
@@ -289,52 +312,74 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
 
-           // Toast.makeText(this, address.to)
+            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()),
+                    DEFAULT_ZOOM, address.getAddressLine(0) );
+
         }
     }
 
     //Location can return null, if the user disables permissions or cannot successfully get a location
 
-    private void getDeviceLocation() {
-        Log.d(TAG, "getDeviceLocation: getting the current devices location");
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+//    private void getDeviceLocation() {
+//        Log.d(TAG, "getDeviceLocation: getting the current devices location");
+//        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+//
+//        try {
+//            if (mLocationPermissionsGranted) {
+//                Task location = mFusedLocationProviderClient.getLastLocation();
+//                location.addOnCompleteListener(new OnCompleteListener() {
+//                    @Override
+//                    public void onComplete(@NonNull @NotNull Task task) {
+//                        if (task.isSuccessful()) {
+//                            Log.d(TAG, "onComplete: found location!");
+//                            Location currentLocation = (Location) task.getResult();
+//
+//                            if (currentLocation == null) {
+//                                Log.d(TAG, "There is not a location!");
+//                            } else {
+//                                Log.d(TAG, "The latitude is: " + currentLocation.getLatitude());
+//
+//                                //moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
+//                                        //DEFAULT_ZOOM, "My Location");
+//
+//                            }
+//
+//
+//                        } else {
+//                            Log.d(TAG, "onComplete: current location is null");
+//                            Toast.makeText(GoogleMapsActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//            }
+//
+//        } catch (SecurityException e) {
+//            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage());
+//        }
+//    }
 
-        try {
-            if (mLocationPermissionsGranted) {
-                Task location = mFusedLocationProviderClient.getLastLocation();
-                location.addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull @NotNull Task task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "onComplete: found location!");
-                            Location currentLocation = (Location) task.getResult();
-
-                            if (currentLocation == null) {
-                                Log.d(TAG, "There is not a location!");
-                            } else {
-                                Log.d(TAG, "The latitude is: " + currentLocation.getLatitude());
-
-                                moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM);
-
-                            }
-
-
-                        } else {
-                            Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(GoogleMapsActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-
-        } catch (SecurityException e) {
-            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage());
-        }
-    }
-
-    private void moveCamera(LatLng latlng, float zoom) {
+    private void moveCamera(LatLng latlng, float zoom, String title) {
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latlng.latitude + ", lng: " + latlng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, zoom));
+
+        //We don't want the marker to be at the same spot as the blue spot indicating our location
+        if (!title.equals("My Location")) {
+
+            //Set marker if we searched a location that is not our own
+            MarkerOptions options = new MarkerOptions()
+                    .position(latlng)
+                    .title(title);
+
+            mMap.addMarker(options);
+
+        }
+
+        hideSoftKeyboard();
+
+    }
+
+    private void hideSoftKeyboard() {
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 }
 
