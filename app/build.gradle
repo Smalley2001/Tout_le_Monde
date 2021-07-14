@@ -1,15 +1,7 @@
 plugins {
     id 'com.android.application'
 
-    //For storing API Key
-    //id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
-
 }
-
-//Followed steps on how to hide an API key from Youtube
-// Link: https://www.youtube.com/watch?v=4xczNJVHW40
-//def API_KEY = '"' + ApiKey + '"' ?: '"Api key not found"'
-//def STRING = 'String'
 
 android {
     compileSdkVersion 30
