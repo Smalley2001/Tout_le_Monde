@@ -25,4 +25,13 @@
         android:layout_marginStart="147dp"
         android:layout_marginTop="217dp"
         android:text="Logout" />
+
+    <Button
+        android:id="@+id/btnCreateEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="113dp"
+        android:text="Create an Event" />
 </RelativeLayout>

@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnGoMap;
     private Button btnLogout;
+    private Button btnCreateEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnGoMap = findViewById(R.id.btnGoMap);
         btnLogout = findViewById(R.id.btnLogout);
+        btnCreateEvent = findViewById(R.id.btnCreateEvent);
 
         if (isServicesOK()) {
             goMapsActivity();
@@ -43,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
 
+            }
+        });
+
+        btnCreateEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goCreateEventActivity();
             }
         });
 
@@ -87,8 +96,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, GoogleMapsActivity.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
+    }
+
+    private void goCreateEventActivity() {
+
+        Intent i = new Intent(MainActivity.this, CreateEventActivity.class);
+        startActivity(i);
+        //finish();
     }
 }
