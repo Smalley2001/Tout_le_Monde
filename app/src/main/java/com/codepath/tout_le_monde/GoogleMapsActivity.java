@@ -23,11 +23,17 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -47,6 +53,10 @@ import com.google.android.gms.tasks.Tasks;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
 
@@ -54,16 +64,20 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
     // of the Maps SDK for Android. The Map Objects guide describes the SupportMapFragment
     // and GoogleMap objects in more detail.
 
-
+    //constants
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15f;
     private static final String TAG = "GoogleMapsActivity";
 
+    //variables
     private GoogleMap mMap;
     private Boolean mLocationPermissionsGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+
+    //widgets
+    private EditText mSearchText;
 
     // mLocationCallback is a public variable for getting the location
     //This is because we want to already have a location stored so when
@@ -90,11 +104,16 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
                         return;
                     }
                     //This sets a blue dot on the map to indicate where you are located
+                    //Also adds a default button in upper right corner of UI that allows
+                    //the user to return back to their location on the map if they scrolled away
                     mMap.setMyLocationEnabled(true);
-                    //Stops app from constantly asking for locations
-                    //This because if the app keeps requesting updates then it will
-                    //significantly drain the user's battery, harming the UX
+                    //Disables the button
+                    mMap.getUiSettings().setMyLocationButtonEnabled(false); //getUiSettings have many features to check out
+                    init();
+
+                    //Stops app from constantly asking for locations to save user's battery
                     LocationServices.getFusedLocationProviderClient(getApplicationContext()).removeLocationUpdates(mLocationCallback);
+                    //init();
                     //TODO: UI updates.
                 }
             }
@@ -106,6 +125,8 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_maps);
+
+        mSearchText = findViewById(R.id.input_search);
 
         getLocationPermission();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -145,7 +166,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
             mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
             //Even though we already have location permissions
-            //Android Studi requires that we explicitly ask for permissions
+            //Android Studio requires that we explicitly ask for permissions
             if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                     COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                     ContextCompat.checkSelfPermission(this.getApplicationContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -194,6 +215,24 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
     }
 
+    private void init() {
+
+        Log.d(TAG, "init: intializiing");
+        mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE
+                || event.getAction() == KeyEvent.ACTION_DOWN || event.getAction() == KeyEvent.KEYCODE_ENTER) {
+
+                    //execute our method for searching
+                    geoLocate();
+
+                }
+                return false;
+            }
+        });
+    }
+
     public void initMap() {
 
 
@@ -231,7 +270,30 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
         }
     }
 
-    //Location can return null,
+    private void geoLocate() {
+        Log.d(TAG, "geoLocate: geolocating");
+        String searchString = mSearchText.getText().toString();
+
+        Geocoder geocoder = new Geocoder(GoogleMapsActivity.this);
+        List<Address> list = new ArrayList<>();
+
+        try {
+            list = geocoder.getFromLocationName(searchString, 1);
+
+        }catch (IOException e) {
+            Log.e(TAG, "geoLocate: IOexception: " + e.getMessage());
+        }
+
+        if (list.size() > 0) {
+            Address address = list.get(0);
+
+            Log.d(TAG, "geoLocate: found a location: " + address.toString());
+
+           // Toast.makeText(this, address.to)
+        }
+    }
+
+    //Location can return null, if the user disables permissions or cannot successfully get a location
 
     private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the current devices location");
