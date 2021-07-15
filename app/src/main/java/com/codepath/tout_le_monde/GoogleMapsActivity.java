@@ -16,12 +16,14 @@ package com.codepath.tout_le_monde;
 // limitations under the License.
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -39,6 +41,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -53,11 +56,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -78,6 +87,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
     private GoogleMap mMap;
     private Boolean mLocationPermissionsGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+//    private TextView textView1, textView2;
 
     //widgets
     private EditText mSearchText;
@@ -133,14 +143,63 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
         mSearchText = findViewById(R.id.input_search);
         mGps = findViewById(R.id.ic_gps);
+//        textView1 = findViewById(R.id.text_view1);
+//        textView2 = findViewById(R.id.text_view2);
 
         getLocationPermission();
+
+        //Initialize places
+        Places.initialize(getApplicationContext(), getString(R.string.GOOGLE_MAPS_API_KEY));
+
+        //Set EditText nonfocusable
+        mSearchText.setFocusable(false);
+        mSearchText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Initialize place field list
+                List<Place.Field> fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG,
+                        Place.Field.NAME);
+
+                //Create intent
+                //AutocompleteActivityMode.Overlay is the option where the google suggestions
+                //only take up part of the screen, if you want the full screen covered with suggestions
+                //use AutocompleteActivityMode.FULLSCREEN
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fieldList)
+                        .build(GoogleMapsActivity.this);
+
+                //Start activity result
+                startActivityForResult(intent, 100);
+            }
+        });
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         //The SupportMapFragment object manages the life cycle of the map and is the
         // parent element of the app's UI.
 //        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 //                .findFragmentById(R.id.map);
 //        mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+
+            //When success
+            //Initialize Place
+
+            Place place = Autocomplete.getPlaceFromIntent(data);
+
+            mSearchText.setText(place.getAddress());
+            geoLocate();
+        } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+            //When error
+            //Initialize status
+
+            Status status = Autocomplete.getStatusFromIntent(data);
+            Toast.makeText(getApplicationContext(), status.getStatusMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
