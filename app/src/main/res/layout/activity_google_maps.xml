@@ -58,4 +58,14 @@
         android:id="@+id/ic_gps"
         android:src="@drawable/ic_gps"/>
 
+    <Button
+        android:id="@+id/btnSubmitLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="56dp"
+        android:text="Submit" />
+
 </RelativeLayout>

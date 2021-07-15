@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void goMapsActivity() {
+    protected void goMapsActivity() {
 
         // This function redirects to the Google Map Activity
         // if button clicked

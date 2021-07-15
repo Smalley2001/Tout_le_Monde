@@ -36,6 +36,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -92,6 +93,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
     //widgets
     private EditText mSearchText;
     private ImageView mGps;
+    private Button btnSubmitLocation;
 
     // mLocationCallback is a public variable for getting the location
     //This is because we want to already have a location stored so when
@@ -143,6 +145,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
         mSearchText = findViewById(R.id.input_search);
         mGps = findViewById(R.id.ic_gps);
+        btnSubmitLocation = findViewById(R.id.btnSubmitLocation);
 //        textView1 = findViewById(R.id.text_view1);
 //        textView2 = findViewById(R.id.text_view2);
 
@@ -172,12 +175,13 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
             }
         });
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        //The SupportMapFragment object manages the life cycle of the map and is the
-        // parent element of the app's UI.
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
+        btnSubmitLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String selected_location = mSearchText.getText().toString();
+                goCreateEventActivity();
+            }
+        });
     }
 
     @Override
@@ -317,7 +321,9 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
     public void initMap() {
 
-
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        //The SupportMapFragment object manages the life cycle of the map and is the
+        // parent element of the app's UI.
         Log.d(TAG, "initMap : initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
@@ -439,6 +445,16 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
 
     private void hideSoftKeyboard() {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
+
+    private void goCreateEventActivity() {
+
+        String selected_location = mSearchText.getText().toString();
+        Log.i("HELP", selected_location);
+        Intent i = new Intent(GoogleMapsActivity.this, CreateEventActivity.class);
+        i.putExtra("Location", selected_location);
+        startActivity(i);
+        //finish();
     }
 }
 
