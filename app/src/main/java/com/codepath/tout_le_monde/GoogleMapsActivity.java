@@ -450,7 +450,6 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
     private void goCreateEventActivity() {
 
         String selected_location = mSearchText.getText().toString();
-        Log.i("HELP", selected_location);
         Intent i = new Intent(GoogleMapsActivity.this, CreateEventActivity.class);
         i.putExtra("Location", selected_location);
         startActivity(i);
