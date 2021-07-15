@@ -5,13 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseObject;
 
-public class CreateEventActivity extends AppCompatActivity {
+public class CreateEventActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
      private EditText etDescription;
      private EditText etDate;
@@ -20,6 +24,7 @@ public class CreateEventActivity extends AppCompatActivity {
      private EditText etMaxParticipants;
      private TextView tvLocation;
      private Button btnSubmit;
+     private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,17 @@ public class CreateEventActivity extends AppCompatActivity {
         etMaxParticipants = findViewById(R.id.etMaxParticipants);
         tvLocation = findViewById(R.id.tvLocation);
         btnSubmit = findViewById(R.id.btnSubmit);
+        spinner = findViewById(R.id.spin);
 
+        //Set up Spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.campaigns, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+//
+//        //Set listener for spinner
+        spinner.setOnItemSelectedListener(this);
+
+        //Grab location from google maps activity
         String location = getIntent().getStringExtra("Location");
 
         tvLocation.setText(location);
@@ -72,6 +87,17 @@ public class CreateEventActivity extends AppCompatActivity {
 
         //Save new event
         new_Event.saveInBackground();
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }

@@ -16,10 +16,11 @@ import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Constants
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
-    private Button btnGoMap;
+    //Variables
     private Button btnLogout;
     private Button btnCreateEvent;
     private Button btnFindEvent;

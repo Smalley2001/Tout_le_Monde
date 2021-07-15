@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Tout_le_Monde</string>
+
+    <string-array name="campaigns">
+
+        <item>Black Lives Matter</item>
+        <item>LGBTQ+</item>
+        <item>MeToo</item>
+        <item>Stop Asian Hate</item>
+    </string-array>
 </resources>
