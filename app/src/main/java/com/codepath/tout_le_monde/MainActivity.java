@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnGoMap;
     private Button btnLogout;
     private Button btnCreateEvent;
+    private Button btnFindEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         btnGoMap = findViewById(R.id.btnGoMap);
         btnLogout = findViewById(R.id.btnLogout);
         btnCreateEvent = findViewById(R.id.btnCreateEvent);
+        btnFindEvent = findViewById(R.id.btnFindEvent);
 
         if (isServicesOK()) {
             goMapsActivity();
@@ -52,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goCreateEventActivity();
+            }
+        });
+
+        btnFindEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goFindEventActivity();
             }
         });
 
@@ -104,6 +113,13 @@ public class MainActivity extends AppCompatActivity {
     private void goCreateEventActivity() {
 
         Intent i = new Intent(MainActivity.this, CreateEventActivity.class);
+        startActivity(i);
+        //finish();
+    }
+
+    private void goFindEventActivity() {
+
+        Intent i = new Intent(MainActivity.this, FindEventActivity.class);
         startActivity(i);
         //finish();
     }

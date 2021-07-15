@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center"
+    android:background="@color/black"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnCreateEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FIND AN EVENT BASED ON CAMPAIGN"
+        android:textColor="@color/black"
+        android:background="@drawable/round1"/>
+
+    <Button
+        android:id="@+id/btnFindEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Find an Event BASED ON LOCATION"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round1"/>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round1"/>
+
+</LinearLayout>
