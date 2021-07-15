@@ -11,36 +11,36 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btnCreateEvent"
+        android:id="@+id/btnBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create an Event"
+        android:text="Black Lives Matter"
         android:textColor="@color/black"
         android:background="@drawable/round1"/>
 
     <Button
-        android:id="@+id/btnFindEvent"
+        android:id="@+id/btnLGBTQ"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find an Event"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/round1"/>
-
-    <Button
-        android:id="@+id/btnMyEvents"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My Created Events"
+        android:text="LGBTQ+"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
         android:background="@drawable/round1"/>
 
     <Button
-        android:id="@+id/btnSignedUpEvents"
+        android:id="@+id/btnMeToo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My Signed Up Events"
+        android:text="#MeTOO Movement"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round1"/>
+
+    <Button
+        android:id="@+id/btnAsian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop Asian Hate Movement"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
         android:background="@drawable/round1"/>

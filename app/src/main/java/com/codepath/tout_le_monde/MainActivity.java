@@ -29,13 +29,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnGoMap = findViewById(R.id.btnGoMap);
         btnLogout = findViewById(R.id.btnLogout);
         btnCreateEvent = findViewById(R.id.btnCreateEvent);
         btnFindEvent = findViewById(R.id.btnFindEvent);
 
         if (isServicesOK()) {
-            goMapsActivity();
+
+//            btnGoMap.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    goMapsActivity();
+//                }
+//            });
+            Log.i("isServicesOK", "Everything is fine");
+//            goMapsActivity();
         }
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
         btnCreateEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goCreateEventActivity();
+                //goCreateEventActivity();
+                goMapsActivity();
             }
         });
 
@@ -100,14 +108,9 @@ public class MainActivity extends AppCompatActivity {
         // This function redirects to the Google Map Activity
         // if button clicked
 
-        btnGoMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, GoogleMapsActivity.class);
-                startActivity(i);
-                //finish();
-            }
-        });
+        Intent i = new Intent(MainActivity.this, GoogleMapsActivity.class);
+        startActivity(i);
+        //finish();
     }
 
     private void goCreateEventActivity() {

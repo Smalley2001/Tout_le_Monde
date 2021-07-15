@@ -11,7 +11,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btnCreateEvent"
+        android:id="@+id/btnFindEventCampaign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="FIND AN EVENT BASED ON CAMPAIGN"
@@ -19,13 +19,23 @@
         android:background="@drawable/round1"/>
 
     <Button
-        android:id="@+id/btnFindEvent"
+        android:id="@+id/btnFindEventLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Find an Event BASED ON LOCATION"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
         android:background="@drawable/round1"/>
+
+    <Button
+        android:id="@+id/btnFindAllEvents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Find ALL EVENTS"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round1"/>
+
 
     <Button
         android:id="@+id/btnLogout"

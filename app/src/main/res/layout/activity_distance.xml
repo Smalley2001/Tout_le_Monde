@@ -11,39 +11,31 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btnCreateEvent"
+        android:id="@+id/btnTen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create an Event"
+        android:text="10 miles from your location"
         android:textColor="@color/black"
         android:background="@drawable/round1"/>
 
     <Button
-        android:id="@+id/btnFindEvent"
+        android:id="@+id/btnTwenty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find an Event"
+        android:text="20 miles from your location"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
         android:background="@drawable/round1"/>
 
     <Button
-        android:id="@+id/btnMyEvents"
+        android:id="@+id/btnFifty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My Created Events"
+        android:text="50 miles from your location"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
         android:background="@drawable/round1"/>
 
-    <Button
-        android:id="@+id/btnSignedUpEvents"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My Signed Up Events"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/round1"/>
 
     <Button
         android:id="@+id/btnLogout"
