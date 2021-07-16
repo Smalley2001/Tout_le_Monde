@@ -24,7 +24,6 @@ public class Event extends ParseObject {
     public static final String KEY_MAX_PARTICIPANTS = "Max_Participants";
     public static final String KEY_HOST = "Host";
     public static final String KEY_START_TIME = "Start";
-//    public static final String KEY_MERIDIEM = "Meridiem";
     public static final String KEY_END_TIME = "End";
     public static final String KEY_IMAGE = "Image";
 
@@ -110,13 +109,5 @@ public class Event extends ParseObject {
         put(KEY_END_TIME, e_time);
     }
 
-//
-//    public String getMeridiem() {
-//        return getString(KEY_MERIDIEM);
-//    }
-//
-//    public void setMeridiem(String meridiem) {
-//        put(KEY_MERIDIEM, meridiem);
-//    }
 
 }
