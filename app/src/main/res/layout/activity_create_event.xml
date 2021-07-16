@@ -14,31 +14,86 @@
         android:textColor="@color/black"
         android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/etCampaign"
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etEventName"
-        android:layout_marginTop="0dp"
-        android:hint="Enter the Campaign"
+        android:id="@+id/campaign_spinner"
+        android:layout_below="@id/etEventName" />
+
+<!--    <EditText-->
+<!--        android:id="@+id/etCampaign"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/etEventName"-->
+<!--        android:layout_marginTop="0dp"-->
+<!--        android:hint="Enter the Campaign"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp" />-->
+
+<!--    <EditText-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/etDate"-->
+<!--        android:hint="Enter the Date"-->
+<!--        android:layout_below="@+id/etCampaign"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp" />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvDate"
+        android:hint="Enter the Event Date"
+        android:layout_below="@+id/campaign_spinner"
         android:textColor="@color/black"
         android:textSize="16sp" />
 
-    <EditText
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etDate"
-        android:hint="Enter the Date"
-        android:layout_below="@+id/etCampaign"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:id="@+id/start_times_spinner"
+        android:layout_below="@id/tvDate" />
+
+
+<!--    <EditText-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/etStart"-->
+<!--        android:hint="Enter the Start Time"-->
+<!--        android:layout_below="@+id/morning_times_spinner"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp" />-->
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/end_times_spinner"
+        android:layout_below="@id/start_times_spinner" />
+
+<!--    <EditText-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/etEnd"-->
+<!--        android:hint="Enter the End Time"-->
+<!--        android:layout_below="@+id/etStart"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp" />-->
+
+<!--    <EditText-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/etMeridiem"-->
+<!--        android:hint="Enter AM or PM"-->
+<!--        android:layout_below="@+id/night_times_spinner"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp" />-->
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etDescription"
         android:hint="Enter the Event Description"
-        android:layout_below="@+id/etDate"
+        android:layout_below="@+id/end_times_spinner"
         android:textColor="@color/black"
         android:textSize="16sp" />
 
@@ -70,11 +125,6 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/round1"/>
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spin"
-        android:layout_below="@id/btnSubmit" />
 
 
 </RelativeLayout>
