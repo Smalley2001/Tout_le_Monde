@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Tout_le_Monde</string>
+    <string name="Description">Description</string>
 
     <string-array name="campaigns">
 

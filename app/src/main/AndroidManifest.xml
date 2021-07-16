@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tout_le_Monde">
-        <activity android:name=".EventTimeline"></activity>
+        <activity android:name=".EventTimelineActivity"></activity>
         <activity android:name=".DistanceActivity" />
         <activity android:name=".FindEventCampaignActivity" />
         <activity android:name=".FindEventActivity" />

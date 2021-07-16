@@ -3,6 +3,7 @@ package com.codepath.tout_le_monde;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -142,6 +143,7 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
                 //Make event in Parse
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 saveEvent(name, campaign, date, location, max_participants, description, start, end, currentUser );
+                goEventTimeLineActivity();
             }
         });
 
@@ -190,5 +192,12 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    private void goEventTimeLineActivity() {
+
+        Intent i = new Intent(CreateEventActivity.this, EventTimelineActivity.class);
+        startActivity(i);
+        //finish();
     }
 }
