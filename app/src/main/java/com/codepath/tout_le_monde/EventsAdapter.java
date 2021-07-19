@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     private Context context;
     private List<Event> events;
+    //Set to default position < 0 to call in onbindViewHolder method
+    //This is used to apply animations to viewholders when onbindViewHolder method is called
+    int last_position = -1;
 
     public EventsAdapter(Context context, List<Event> events) {
         this.context = context;
@@ -38,8 +43,13 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
 
-        Event event = events.get(position);
-        holder.bind(event);
+        if(holder.getAdapterPosition() > last_position) {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in);
+            ((ViewHolder) holder).itemView.startAnimation(animation);
+            Event event = events.get(position);
+            holder.bind(event);
+            last_position = holder.getAdapterPosition();
+        }
     }
 
     @Override
