@@ -27,16 +27,41 @@ on where the events are relative to their location.
 
 **Required Must-have Stories**
 
-* Allow the user to sign up/login to the app using Parse
-* User can create an event and allow others to sign up
-* Event location is visible using Google Maps API (potentially difficult)
-* Users can search for events to sign up for. 
-* Users can see the events that they signed up for
-* User can cancel an event that they created and the event must be removed for all individuals who signed up
-* User can cancel their sign up for an event
-* User can filter events based on the distance away from their actual location
+- User can login/logout of the app
+  * Allow the user to login to the app using Parse
+ 
+-User can signup with a new user profile
+  * Create new user in Parse to allow people to sign up to the app
 
+-Your app integrates at least one SDK or API
+  * Implement Google Maps API to allow the user to select an event location
 
+-Your app interacts with a database
+  *Create a database using parse to store users and events created
+  
+-Your app has multiple views
+  *Create a recycler view to allow events to populate as the user scrolls through the UI
+  *Create button views to implement intents to create flow navigation
+  *Have Edit text views to allow the user to input information
+  
+-Your app must include an external library to add visual polish
+  *Implement Glide library to implement placeholder images, error images, and 
+  the functionality to alter image size (if necessary) to scale on UI
+  
+-Your app must include an animation
+  *Implement animation to let recycler view items slide into the UI
+  
+-Your app provides opportunities for you to overcome difficult/ambiguous technical problems
+  *Filter events based on distance of events relative user's location. 
+  *Use Google Maps SDK to implement distance functionality
+  
+-Other MVP requirements
+  
+  * User can create an event and allow others to sign up
+  * Users can search for events to sign up for.
+  * Users can see the events that they signed up for
+  * User can cancel an event that they created and the event must be removed for all individuals who signed up
+  * User can cancel their sign up for an event
 
 **Optional Nice-to-have Stories**
 
@@ -160,6 +185,9 @@ Event class has following attributes:
     * Object ID (String)
     * updatedAt (Date)
     * createdAt (Date)
+    * Date (Date)
+    * Start (String)
+    * End (String)
     * Host      (Pointer to User object)
     * Campaign  (String)
     * Description (String)
