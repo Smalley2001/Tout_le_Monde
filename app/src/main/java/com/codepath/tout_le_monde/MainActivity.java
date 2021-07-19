@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogout;
     private Button btnCreateEvent;
     private Button btnFindEvent;
+    private Button btnMyCreatedEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
         btnCreateEvent = findViewById(R.id.btnCreateEvent);
         btnFindEvent = findViewById(R.id.btnFindEvent);
+        btnMyCreatedEvents = findViewById(R.id.btnMyEvents);
 
         if (isServicesOK()) {
 
@@ -70,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goFindEventActivity();
+            }
+        });
+
+        btnMyCreatedEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goMyCreatedEventsActivity();
             }
         });
 
@@ -124,6 +133,13 @@ public class MainActivity extends AppCompatActivity {
     private void goFindEventActivity() {
 
         Intent i = new Intent(MainActivity.this, FindEventActivity.class);
+        startActivity(i);
+        //finish();
+    }
+
+    private void goMyCreatedEventsActivity() {
+
+        Intent i = new Intent(MainActivity.this, MyCreatedEventsActivity.class);
         startActivity(i);
         //finish();
     }

@@ -9,47 +9,49 @@ import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventTimelineActivity extends AppCompatActivity {
+public class MyCreatedEventsActivity extends EventTimelineActivity {
 
-    public static final String TAG = "EventTimeineActivity";
-    private EventsAdapter adapter;
-    private List<Event> allEvents;
-    private RecyclerView rvEvents;
+    private RecyclerView rvMyEvents;
+    protected EventsAdapter myadapter;
+    protected List<Event> myallEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_timeline);
+        setContentView(R.layout.activity_my_created_events);
 
-        rvEvents = findViewById(R.id.rvEvents);
+        rvMyEvents = findViewById(R.id.rvMyEvents);
 
         // initialize the array that will hold events and create a EventsAdapter
-        allEvents = new ArrayList<>();
-        adapter = new EventsAdapter(this, allEvents);
+        myallEvents = new ArrayList<>();
+        myadapter = new EventsAdapter(this, myallEvents);
 
         // set the adapter on the recycler view
-        rvEvents.setAdapter(adapter);
+        rvMyEvents.setAdapter(myadapter);
         // set the layout manager on the recycler view
-        rvEvents.setLayoutManager(new LinearLayoutManager(this));
-        // query events from EventTimeline
+        rvMyEvents.setLayoutManager(new LinearLayoutManager(this));
+        // query posts from EventTimeline
         queryEvents();
     }
 
+
     private void queryEvents() {
-        // specify what type of data we want to query - Post.class
+        // specify what type of data we want to query - Event.class
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
         // include data referred by user key
         query.include(Event.KEY_HOST);
         // limit query to latest 20 items
+        query.whereEqualTo(Event.KEY_HOST, ParseUser.getCurrentUser());
+
         query.setLimit(20);
         // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
-        // start an asynchronous call for posts
+        // start an asynchronous call for events
         query.findInBackground(new FindCallback<Event>() {
             @Override
             public void done(List<Event> events, com.parse.ParseException e) {
@@ -65,9 +67,9 @@ public class EventTimelineActivity extends AppCompatActivity {
                     Log.i(TAG, "Event: " + event.getDescription() + ", username: " + event.getHost().getUsername());
                 }
 
-                // save received posts to list and notify adapter of new data
-                allEvents.addAll(events);
-                adapter.notifyDataSetChanged();
+                // save received events to list and notify adapter of new data
+                myallEvents.addAll(events);
+                myadapter.notifyDataSetChanged();
 
             }
 
