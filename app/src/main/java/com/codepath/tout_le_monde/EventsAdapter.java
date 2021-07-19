@@ -1,6 +1,8 @@
 package com.codepath.tout_le_monde;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.parse.ParseFile;
 
 import org.jetbrains.annotations.NotNull;
+import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
 import java.util.List;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder>  {
 
+    private static final String TAG = "EventsAdapter";
     private Context context;
     private List<Event> events;
     //Set to default position < 0 to call in onbindViewHolder method
@@ -57,7 +61,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         return events.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvEventName;
         TextView tvDate;
@@ -81,6 +85,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             tvHost = itemView.findViewById(R.id.tvHost);
             tvDescriptionTitle = itemView.findViewById(R.id.tvDescriptionTitle);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Event event) {
@@ -98,6 +104,25 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 //            if (image != null) {
 //                Glide.with(context).load(image.getUrl()).into(ivImage);
 //            }
+        }
+
+
+        @Override
+        public void onClick(View v) {
+
+            int position = getAdapterPosition();
+
+            if(position != RecyclerView.NO_POSITION) {
+
+                Event event = events.get(position);
+
+                Log.i(TAG, event.getName());
+                Intent intent = new Intent(context, EventDetailsActivity.class);
+
+                intent.putExtra(Event.class.getSimpleName(), Parcels.wrap(event));
+
+                context.startActivity(intent);
+            }
         }
     }
 }

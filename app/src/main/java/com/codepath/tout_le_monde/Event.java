@@ -7,8 +7,12 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.parceler.Parcel;
+
 import java.util.Date;
 
+//Add Parcel library to make class serializable
+@Parcel(analyze = Event.class)
 // Refer to the entity in the Parse dashboard
 @ParseClassName("Event")
 public class Event extends ParseObject {
@@ -26,6 +30,11 @@ public class Event extends ParseObject {
     public static final String KEY_START_TIME = "Start";
     public static final String KEY_END_TIME = "End";
     public static final String KEY_IMAGE = "Image";
+
+    //Initialize empty constructor for Parcel
+    public Event() {
+
+    }
 
 
     public String getName() {
