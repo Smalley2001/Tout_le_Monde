@@ -17,9 +17,6 @@ import java.util.Date;
 @ParseClassName("Event")
 public class Event extends ParseObject {
 
-    //Don't forget to add a date attribute once we can save an event to Parse
-    //look up more about the date object
-
     public static final String KEY_NAME = "Name";
     public static final String KEY_CAMPAIGN = "Campaign";
     public static final String KEY_DATE = "Date";
