@@ -65,8 +65,18 @@ dependencies {
     // Glide v4 uses this new annotation processor -- see https://bumptech.github.io/glide/doc/generatedapi.html
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
-    //Parcels
+    // Parcels
     implementation 'org.parceler:parceler-api:1.1.12'
     annotationProcessor 'org.parceler:parceler:1.1.12'
+
+    // Grid Layout
+    //noinspection GradleCompatible
+    implementation 'com.android.support:gridlayout-v7:28.0.0'
+
+    // Apache
+    implementation 'commons-io:commons-io:2.6'
+
+    // Auto Image Slider
+    implementation 'com.github.smarteist:autoimageslider:1.3.9'
 
 }

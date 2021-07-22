@@ -8,9 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
+
 public class WelcomeActivity extends AppCompatActivity {
 
     private Button btnStart;
+    SliderView sliderView;
+    int [] images = {R.drawable.metoo,R.drawable.blackl, R.drawable.asianhate, R.drawable.lgbtq_slide,
+            R.drawable.together};
+
+    SliderAp sliderAp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +27,13 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         btnStart = findViewById(R.id.btnStart);
+        sliderView = findViewById(R.id.slider_view);
+
+        sliderAp = new SliderAp(images);
+        sliderView.setSliderAdapter(sliderAp);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
+        sliderView.startAutoCycle();
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,12 +48,5 @@ public class WelcomeActivity extends AppCompatActivity {
     private void goLoginActivity() {
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
-        finish();
-    }
-
-    private void goRegistrationActivity() {
-        Intent i = new Intent(this, RegistrationActivity.class);
-        startActivity(i);
-        finish();
     }
 }

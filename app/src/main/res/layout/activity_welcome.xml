@@ -7,27 +7,6 @@
     android:background="@color/black"
     tools:context=".WelcomeActivity">
 
-    <TextView
-        android:id="@+id/etWelcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="114dp"
-        android:layout_marginEnd="0dp"
-        android:text="Welcome"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:textSize="50dp"
-        android:textStyle="bold"/>
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:src="@drawable/placeholder" />
-
     <Button
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
@@ -36,6 +15,21 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="120dp"
-        android:layout_marginBottom="203dp"
+        android:layout_marginBottom="50dp"
         android:text="Let's Get Started" />
+
+    <com.smarteist.autoimageslider.SliderView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/slider_view"
+        app:sliderScrollTimeInSec="3"
+        app:sliderStartAutoCycle="true"
+        app:sliderAutoCycleDirection="back_and_forth"
+        app:sliderIndicatorPadding="4dp"
+        app:sliderIndicatorRadius="1.5dp"
+        app:sliderIndicatorSelectedColor="#636363"
+        app:sliderAnimationDuration="1000"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorGravity="center_horizontal|bottom" />
+
 </RelativeLayout>
