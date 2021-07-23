@@ -1,81 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/black"
     tools:context=".CreateEventActivity">
 
     <EditText
-        android:id="@+id/etEventName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/et_name"
         android:hint="Enter the Event Name"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:padding="10dp"
+        android:inputType="textPersonName"
+        android:textSize="15sp"
+        android:background="@color/white" />
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/campaign_spinner"
-        android:layout_below="@id/etEventName" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvDate"
-        android:hint="Enter the Event Date"
-        android:layout_below="@+id/campaign_spinner"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/start_times_spinner"
-        android:layout_below="@id/tvDate" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/end_times_spinner"
-        android:layout_below="@id/start_times_spinner" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etDescription"
-        android:hint="Enter the Event Description"
-        android:layout_below="@+id/end_times_spinner"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etMaxParticipants"
-        android:hint="Enter the Max number of participants or N/A"
-        android:layout_below="@+id/etDescription"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:id="@+id/tv_campaign"
+        android:hint="Event Campaign"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Location"
-        android:layout_below="@id/etMaxParticipants"
-        android:id="@+id/tvLocation"
-        android:textSize="16sp"
-        android:textColor="@color/black" />
+        android:id="@+id/tv_location"
+        android:hint="Event Location"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_date"
+        android:hint="Click Here to Enter the Date"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white" />
+
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:id="@+id/starting_spinner"
+        android:background="@color/white"
+        android:popupBackground="@color/white"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:id="@+id/ending_spinner"
+        android:background="@color/white"
+        android:popupBackground="@color/white"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_max"
+        android:hint="Enter Maximum Participants or Enter N/A"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_description"
+        android:hint="Enter Event Description"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white" />
 
     <Button
-        android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/btn_Submit_Event"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:text="Submit"
-        android:textColor="@color/black"
-        android:layout_below="@+id/tvLocation"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/round1"/>
+        android:background="@color/white" />
 
 
-</RelativeLayout>
+</LinearLayout>
