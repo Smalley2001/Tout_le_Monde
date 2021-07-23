@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">Tout_le_Monde</string>
     <string name="Description">Description</string>
+    <string name="invalid_name">Please Enter Valid Name</string>
+    <string name="invalid_max">Please Enter Valid Max Value</string>
+    <string name="invalid_description">Please Enter a Valid Description</string>
+    <string name="invalid_mobile">Please Enter a Valid Number</string>
+    <string name="invalid_email">Please Enter Valid Email</string>
+    <string name="invalid_confirm_password">Password does not match</string>
 
     <string-array name="campaigns">
-
+        <item>Select a Campaign or Enter your own</item>
         <item>Black Lives Matter</item>
         <item>LGBTQ+</item>
         <item>MeToo</item>
