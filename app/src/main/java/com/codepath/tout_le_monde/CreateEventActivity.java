@@ -22,6 +22,7 @@ import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -30,6 +31,8 @@ import java.util.Calendar;
 public class CreateEventActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "TestActivity";
+    private double latitude;
+    private double longitude;
 
     private Button btnSubmitEvent;
     private EditText etName;
@@ -43,6 +46,7 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
 
     private AwesomeValidation awesomeValidation;
     private DatePickerDialog.OnDateSetListener MDateSetListener;
+    private ParseFile file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +89,7 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
                     String max_participants = etMax.getText().toString();
                     String date = tvDate.getText().toString();
                     ParseUser currentUser = ParseUser.getCurrentUser();
-                    saveEvent(name, campaign, date, location, max_participants, description, start, end, currentUser);
+                    saveEvent(name, campaign, date, location, max_participants, description, start, end, currentUser, latitude, longitude);
                     goEventTimeLineActivity();
                     Toast.makeText(getApplicationContext(), "Event Created", Toast.LENGTH_SHORT).show();
                 } else {
@@ -141,6 +145,9 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
         // Grab location from google maps activity
         String location = getIntent().getStringExtra("MapsLocation");
         String campaign = getIntent().getStringExtra("Campaign");
+        latitude = getIntent().getDoubleExtra("MapsLatitude",0);
+        longitude = getIntent().getDoubleExtra("MapsLongitude",0);
+        Log.i(TAG, "Received latitude: " + latitude + "And: " + longitude);
         Log.i(TAG, "  Received campaign: " + campaign);
 
         tvLocation.setText(location);
@@ -168,7 +175,7 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
     }
 
 
-    private void saveEvent(String name, String campaign, String date, String location, String max_participants, String description, String start, String end, ParseUser host) {
+    private void saveEvent(String name, String campaign, String date, String location, String max_participants, String description, String start, String end, ParseUser host, double latitude, double longitude) {
 
         Event event = new Event();
         event.setName(name);
@@ -180,6 +187,8 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
         event.setEndTime(end);
         event.setMaxParticipants(max_participants);
         event.setHost(host);
+        event.setLatitude(latitude);
+        event.setLongitude(longitude);
 
         // Save to parse
         event.saveInBackground(new SaveCallback() {

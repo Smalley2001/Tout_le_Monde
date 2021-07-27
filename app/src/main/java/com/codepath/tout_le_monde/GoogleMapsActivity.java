@@ -161,7 +161,14 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 String selected_location = MSearchText.getText().toString();
-                goCreateEventActivity();
+
+                if (CurrentPlace != null) {
+
+                    Log.i(TAG, "Current Place Latitude: " + CurrentPlace.getLatLng().latitude);
+                    Log.i(TAG, "Current Place Longitude: " + CurrentPlace.getLatLng().longitude);
+                }
+
+                goCampaignRecyclerActivity();
             }
         });
     }
@@ -228,7 +235,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
-        //Check if we have permission to access the user's location
+        // Check if we have permission to access the user's location
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -373,7 +380,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
         MyMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, zoom));
 
         MyMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(GoogleMapsActivity.this));
-        //W e don't want the marker to be at the same spot as the blue spot indicating our location
+        // We don't want the marker to be at the same spot as the blue spot indicating our location
         if (!title.equals("My Location")) {
 
             if (CurrentPlace != null) {
@@ -415,11 +422,14 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
-    private void goCreateEventActivity() {
+
+    private void goCampaignRecyclerActivity() {
 
         String selected_location = MSearchText.getText().toString();
-        Intent i = new Intent(GoogleMapsActivity.this, CreateEventActivity.class);
+        Intent i = new Intent(GoogleMapsActivity.this, CampaignRecyclerActivity.class);
         i.putExtra("Location", selected_location);
+        i.putExtra("Latitude", CurrentPlace.getLatLng().latitude);
+        i.putExtra("Longitude", CurrentPlace.getLatLng().longitude);
         startActivity(i);
     }
 }
