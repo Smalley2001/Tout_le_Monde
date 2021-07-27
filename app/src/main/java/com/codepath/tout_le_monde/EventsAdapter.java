@@ -13,11 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.parse.ParseFile;
+import com.parse.ParseException;
 
 import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -26,8 +25,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     private static final String TAG = "EventsAdapter";
     private Context context;
     private List<Event> events;
-    //Set to default position < 0 to call in onbindViewHolder method
-    //This is used to apply animations to viewholders when onbindViewHolder method is called
+    // Set to default position < 0 to call in onbindViewHolder method
+    // This is used to apply animations to viewholders when onbindViewHolder method is called
     int last_position = -1;
 
     public EventsAdapter(Context context, List<Event> events) {
@@ -51,7 +50,11 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in);
             ((ViewHolder) holder).itemView.startAnimation(animation);
             Event event = events.get(position);
-            holder.bind(event);
+            try {
+                holder.bind(event);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             last_position = holder.getAdapterPosition();
         }
     }
@@ -80,7 +83,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             tvDate = itemView.findViewById(R.id.tvDate);
             tvStart = itemView.findViewById(R.id.tvStart);
             tvEnd = itemView.findViewById(R.id.tvEnd);
-            tvCampaign = itemView.findViewById(R.id.tvCampaign);
+            tvCampaign = itemView.findViewById(R.id.gotCampaign);
             tvEventLocation = itemView.findViewById(R.id.tvEventLocation);
             tvHost = itemView.findViewById(R.id.tvHost);
             tvDescriptionTitle = itemView.findViewById(R.id.tvDescriptionTitle);
@@ -89,21 +92,25 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             itemView.setOnClickListener(this);
         }
 
-        public void bind(Event event) {
+        public void bind(Event event) throws ParseException {
             // Bind the post data to the view elements
+            String campaign = "Campaign: " + event.getCampaign();
+            String date = "Date: " + event.getDate();
+            String description = "Description: " + event.getDescription();
+            String location = "Location: " + event.getLocation();
+            String host = "Host: " + event.getHostUsername();
+            String start = "Start Time: " + event.getStartTime();
+            String end = "End Time: " + event.getEndTime();
+
             tvEventName.setText(event.getName());
-            tvDate.setText(event.getDate());
-            tvStart.setText(event.getStartTime());
-            tvEnd.setText(event.getEndTime());
-            tvCampaign.setText(event.getCampaign());
-            tvEventLocation.setText(event.getLocation());
-            tvHost.setText(event.getHost().getUsername());
+            tvDate.setText(date);
+            tvStart.setText(start);
+            tvEnd.setText(end);
+            tvCampaign.setText(campaign);
+            tvEventLocation.setText(location);
+            tvHost.setText(host);
             tvDescriptionTitle.setText(R.string.Description);
-            tvDescription.setText(event.getDescription());
-//            ParseFile image = post.getImage();
-//            if (image != null) {
-//                Glide.with(context).load(image.getUrl()).into(ivImage);
-//            }
+            tvDescription.setText(description);
         }
 
 
@@ -117,11 +124,47 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
                 Event event = events.get(position);
 
                 Log.i(TAG, event.getName());
-                Intent intent = new Intent(context, EventDetailsActivity.class);
 
-                intent.putExtra(Event.class.getSimpleName(), Parcels.wrap(event));
+                Log.d(TAG, context.getClass().toString());
 
-                context.startActivity(intent);
+                String host = event.getHost().getUsername();
+                Log.i(TAG, "Host is : " + host);
+
+                Log.i(TAG, context.getClass().toString());
+
+                if (context.getClass().toString().equals("class com.codepath.tout_le_monde.EventTimelineActivity")) {
+                    Intent intent = new Intent(context, EventDetailsActivity.class);
+                    intent.putExtra("Context_Name", context.getClass().toString());
+                    intent.putExtra("X", Parcels.wrap(event));
+                    intent.putExtra("U", Parcels.wrap(event.getHost()));
+
+                    context.startActivity(intent);
+                } else if (context.getClass().toString().equals("class com.codepath.tout_le_monde.MyCreatedEventsActivity")) {
+                    Intent intent = new Intent(context, CreatedEventDetailsActivity.class);
+                    intent.putExtra("Context_Name", context.getClass().toString());
+                    intent.putExtra("X", Parcels.wrap(event));
+                    intent.putExtra("U", Parcels.wrap(event.getHost()));
+
+                    context.startActivity(intent);
+                } else if (context.getClass().toString().equals("class com.codepath.tout_le_monde.MySignedUpEventsActivity")) {
+                    Intent intent = new Intent(context, SignedUpEventDetailsActivity.class);
+                    intent.putExtra("Context_Name", context.getClass().toString());
+                    intent.putExtra("X", Parcels.wrap(event));
+                    intent.putExtra("U", Parcels.wrap(event.getHost()));
+                    context.startActivity(intent);
+                }
+
+
+                else {
+
+                    Intent intent = new Intent(context, EventDetailsActivity.class);
+//                intent.putExtra("Host", host);
+                    intent.putExtra("Context_Name", context.getClass().toString());
+                    intent.putExtra("X", Parcels.wrap(event));
+                    intent.putExtra("U", Parcels.wrap(event.getHost()));
+
+                    context.startActivity(intent);
+                }
             }
         }
     }
