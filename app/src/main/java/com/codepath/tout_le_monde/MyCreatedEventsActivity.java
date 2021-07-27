@@ -17,8 +17,8 @@ import java.util.List;
 public class MyCreatedEventsActivity extends EventTimelineActivity {
 
     private RecyclerView rvMyEvents;
-    protected EventsAdapter myadapter;
-    protected List<Event> myallEvents;
+    private EventsAdapter myadapter;
+    private List<Event> myallEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
