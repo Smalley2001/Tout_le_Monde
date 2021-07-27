@@ -64,17 +64,12 @@ on where the events are relative to their location.
   * User can cancel their sign up for an event
 
 **Optional Nice-to-have Stories**
-
-* The user can contact the host if they have questions possibly using the Twilio API
-* The user can create an event and the event will be saved in a database
-* User can sign in using Google Sign-in SDK or Facebook SDK
-* User can filter events based on the distance away from their actual location
-* User can filter events based on the dates the events will take place
-* User can filter events based on social advocacy campaign (Black Lives Matter, LGBTQ+, Stop Asian Hate)
-* Create a social advocacy details page to for each group to explain the purpose of the movements
-* Display the number of people who signed up for an event and update the number when a new person signs up or when a person cancels their sign up
+* Create event recommendation system that contacts users near event locations and recommends that the user signs up for the event
+* Implement Google Places SDK to enable location autocomplete and display location details such as Email and Phone Number
 * Create sliding images for UI customizations 
-* User receives a notification when they sign up for an event and when the user cancels sign up.
+* Include form validation library to ensure valid inputs for registration page and create an event page
+* Display the number of people who signed up for an event and update the number when a new person signs up or when a person cancels their sign up
+* User can sign in using Google Sign-in SDK or Facebook SDK
 
 ### 2. Screen Archetypes
 
@@ -180,21 +175,29 @@ User class has following attributes:
     * createdAt (Date)
     * username (String)
     * password (String)
+    * email    (String)
+    * Phone    (String)
+
+
     
 Event class has following attributes:
-    * Object ID (String)
-    * updatedAt (Date)
-    * createdAt (Date)
-    * Date (Date)
-    * Start (String)
-    * End (String)
-    * Host      (Pointer to User object)
-    * Campaign  (String)
-    * Description (String)
-    * Location    (String)
+    * Object ID        (String)
+    * updatedAt        (Date)
+    * createdAt        (Date)
+    * Date             (String)
+    * Start            (String)
+    * End              (String)
+    * Host             (Pointer to User object)
+    * Campaign         (String)
+    * Description      (String)
+    * Location         (String)
     * Max_Participants (Number)
     * Image            (File)
     * Canceled         (boolean)
+    * Latitude         (Number)
+    * Longitude        (Number)
+    * Latitude         (Number)
+    
     
 ### Models
 [Add table of models]
