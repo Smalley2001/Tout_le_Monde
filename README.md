@@ -68,6 +68,7 @@ on where the events are relative to their location.
 * Implement Google Places SDK to enable location autocomplete and display location details such as Email and Phone Number
 * Create sliding images for UI customizations 
 * Allow user to enter a photo from the gallery and set the photo to represent the Event.
+* Use DS Photo Editor SDK to allow users to crop, resize, and customize thier uploaded image.
 * Include form validation library to ensure valid inputs for registration page and create an event page
 * Display the number of people who signed up for an event and update the number when a new person signs up or when a person cancels their sign up
 * User can sign in using Google Sign-in SDK or Facebook SDK
