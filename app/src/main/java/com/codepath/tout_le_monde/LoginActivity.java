@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.LogInCallback;
@@ -16,16 +17,18 @@ import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String TAG = "LoginActivity";
+    private TextView signUp;
+    private static final String TAG = "TestLog";
+    private Button btnLogin;
     private EditText etUsername;
     private EditText etPassword;
-    private Button btnLogin;
-    private Button BtnRegistration;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         // If user already logged in, send them to Main Activity
         if (ParseUser.getCurrentUser() != null) {
@@ -33,13 +36,18 @@ public class LoginActivity extends AppCompatActivity {
             goMainActivity();
         }
 
-        //Set member variables equal to the views in activity_login
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
-        btnLogin = findViewById(R.id.btnLogin);
-        BtnRegistration = findViewById(R.id.btnRegistration);
+        btnLogin = findViewById(R.id.btnLoginButton);
+        etUsername = findViewById(R.id.inputLoginUsername);
+        etPassword = findViewById(R.id.inputUserPassword);
+        signUp = findViewById(R.id.textViewSignUp);
 
-        //Set onclick listener for button
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
+            }
+        });
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,31 +58,22 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(username, password);
             }
         });
-
-        BtnRegistration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goRegistrationActivity();
-            }
-        });
-
     }
 
     private void loginUser(String username, String password) {
         Log.i(TAG, "Attempting to login user " + username);
-        // TODO: navigate to the main activity if the user has signed properly
 
+        // Navigate to the main activity if the user has signed properly
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
-                // TODO better error handling
+                // Login Failed
                 if (e != null) {
                     Log.e(TAG, "Issue with login", e);
                     Toast.makeText(LoginActivity.this, "Issue with login", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // TODO: navigate to the main activity if the user has signed in properly
-                Log.i(TAG, "It worked");
+                // Login Success
                 goMainActivity();
                 Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
 
@@ -88,8 +87,4 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private void goRegistrationActivity() {
-        Intent i = new Intent(this, RegistrationActivity.class);
-        startActivity(i);
-    }
 }

@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -21,7 +22,10 @@ import com.parse.SignUpCallback;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    public static final String TAG = "RegistrationActivity";
+    private TextView login;
+    public static final String TAG = "TestReg";
+    private AwesomeValidation awesomeValidation;
+
     private EditText etUsername;
     private EditText etPassword;
     private EditText etEmail;
@@ -29,45 +33,44 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText etConfirmPassword;
     private Button btnSubmitUser;
 
-    private AwesomeValidation awesomeValidation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        //Set member variables equal to the views in activity_registration
-        etUsername = findViewById(R.id.etUsername);
-        etEmail = findViewById(R.id.etEmail);
-        etMobile = findViewById(R.id.etMobile);
-        etPassword = findViewById(R.id.etPassword);
-        etConfirmPassword = findViewById(R.id.etConfirmPassword);
-        btnSubmitUser = findViewById(R.id.btnSubmitUser);
+        etUsername = findViewById(R.id.inputRegUsername);
+        etPassword = findViewById(R.id.inputRegPassword);
+        etEmail = findViewById(R.id.inputRegEmail);
+        etMobile = findViewById(R.id.inputRegPhoneNumber);
+        etConfirmPassword = findViewById(R.id.inputRegConfirmPassword);
+        btnSubmitUser = findViewById(R.id.btnRegister);
 
-        //Initialize Validation Style
-        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+        // Initialize Validation Style
+        awesomeValidation = new AwesomeValidation(ValidationStyle.COLORATION);
 
-        awesomeValidation.addValidation(this,R.id.etUsername, RegexTemplate.NOT_EMPTY,
+        awesomeValidation.addValidation(this,R.id.inputRegUsername, RegexTemplate.NOT_EMPTY,
                 R.string.invalid_name);
 
-        awesomeValidation.addValidation(this,R.id.etMobile, "[1-9]{1}[0-9]{9}$",
+        awesomeValidation.addValidation(this,R.id.inputRegPhoneNumber, "[1-9]{1}[0-9]{9}$",
                 R.string.invalid_mobile);
 
-        awesomeValidation.addValidation(this,R.id.etEmail, RegexTemplate.NOT_EMPTY,
+        awesomeValidation.addValidation(this,R.id.inputRegEmail, Patterns.EMAIL_ADDRESS,
                 R.string.invalid_email);
 
-        awesomeValidation.addValidation(this,R.id.etConfirmPassword,R.id.etPassword,
+        awesomeValidation.addValidation(this,R.id.inputRegPassword, RegexTemplate.NOT_EMPTY,
+                R.string.invalid_password);
+
+        awesomeValidation.addValidation(this,R.id.inputRegConfirmPassword,R.id.inputRegPassword,
                 R.string.invalid_confirm_password);
 
 
-
-        //Set onclick listener for button
         btnSubmitUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "onCLick registration button");
 
                 if(awesomeValidation.validate()) {
-
+                    Log.i(TAG, "hi there");
                     String username = etUsername.getText().toString();
                     String password = etPassword.getText().toString();
                     String email = etEmail.getText().toString();
@@ -79,7 +82,17 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+
+        login = findViewById(R.id.alreadyHaveAccount);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+            }
+        });
+
     }
+
 
     private void SignUpUser(String username, String password, String email, String phoneNumber) {
 
@@ -101,22 +114,19 @@ public class RegistrationActivity extends AppCompatActivity {
                             Log.i(TAG, "Phone Number saved!");
                         }
                     });
-                    goMainActivity();
+                    goYouTubeActivity();
 
                 } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
+                    // Sign up failed
                     Log.i(TAG, "Error: " + e.getMessage());
                 }
             }
         });
     }
 
-    private void goMainActivity() {
-        Intent i = new Intent(this, MainActivity.class);
+    private void goYouTubeActivity() {
+        Intent i = new Intent(this, YouTubeActivity.class);
         startActivity(i);
         finish();
     }
-
-
 }
