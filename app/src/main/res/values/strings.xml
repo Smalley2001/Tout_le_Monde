@@ -7,6 +7,7 @@
     <string name="invalid_mobile">Please Enter a Valid Number</string>
     <string name="invalid_email">Please Enter Valid Email</string>
     <string name="invalid_confirm_password">Password does not match</string>
+    <string name="invalid_password">Password cannot be empty</string>
 
     <string-array name="campaigns">
         <item>Select a Campaign or Enter your own</item>

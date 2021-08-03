@@ -14,11 +14,14 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:largeHeap="true"
         android:theme="@style/Theme.Tout_le_Monde">
-        <activity android:name=".ImageEditorActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".TwentyFiveMileFiltering" />
+        <activity android:name=".ImageEditorActivity" />
         <activity android:name=".ExampleActivity" />
         <activity android:name=".SendSMSActivity" />
         <activity android:name=".TenMileFiltering" />
@@ -41,27 +44,21 @@
             android:value="@string/GOOGLE_MAPS_API_KEY" />
 
         <activity android:name=".GoogleMapsActivity" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".LoginActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-<!--        Initialize attributes of DsPhotoEditor SDK-->
-
+        </activity> <!-- Initialize attributes of DsPhotoEditor SDK -->
         <activity android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity" />
         <activity android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorStickerActivity" />
-        <activity android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorTextActivity"
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorTextActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorCropActivity" />
         <activity android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorDrawActivity" />
-        <activity android:name=".MainActivity" />
-
-<!--        Used for Broadcast Receiver for Alarm Manager-->
+        <activity android:name=".MainActivity" /> <!-- Used for Broadcast Receiver for Alarm Manager -->
         <receiver android:name=".Reminder" />
     </application>
 
