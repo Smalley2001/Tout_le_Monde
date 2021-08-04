@@ -71,6 +71,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 event.setParticipantsCount(count);
                 event.saveInBackground();
                 Toast.makeText(getApplicationContext(),"Sign Up Successful", Toast.LENGTH_SHORT).show();
+                goMainActivity();
 
             }
         });
@@ -89,6 +90,12 @@ public class EventDetailsActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), EventTimelineActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void goMainActivity() {
+
+        Intent i = new Intent(EventDetailsActivity.this, MainActivity.class);
+        startActivity(i);
     }
 
     private int getMaxPeople() {

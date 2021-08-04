@@ -2,18 +2,23 @@ package com.codepath.tout_le_monde;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 
 import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
@@ -56,12 +61,24 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
                 e.printStackTrace();
             }
             last_position = holder.getAdapterPosition();
+        } else {
+            try {
+                holder.bind(events.get(position));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
     public int getItemCount() {
         return events.size();
+    }
+
+    public void filterList (List<Event> mEvents) {
+        events = mEvents;
+        notifyDataSetChanged();
+        last_position = 0;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -75,6 +92,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         TextView tvHost;
         TextView tvDescriptionTitle;
         TextView tvDescription;
+        ImageView campaignImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +106,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             tvHost = itemView.findViewById(R.id.tvHost);
             tvDescriptionTitle = itemView.findViewById(R.id.tvDescriptionTitle);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+            campaignImage = itemView.findViewById(R.id.CampaignImage);
 
             itemView.setOnClickListener(this);
         }
@@ -96,7 +115,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             // Bind the post data to the view elements
             String campaign = "Campaign: " + event.getCampaign();
             String date = "Date: " + event.getDate();
-            String description = "Description: " + event.getDescription();
+            String description = event.getDescription();
             String location = "Location: " + event.getLocation();
             String host = "Host: " + event.getHostUsername();
             String start = "Start Time: " + event.getStartTime();
@@ -111,7 +130,31 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             tvHost.setText(host);
             tvDescriptionTitle.setText(R.string.Description);
             tvDescription.setText(description);
+
+            ParseFile file = event.getImage();
+            loadImages(file, campaignImage);
+
         }
+
+        private void loadImages(ParseFile thumbnail, final ImageView img) {
+
+            if (thumbnail != null) {
+                thumbnail.getDataInBackground(new GetDataCallback() {
+                    @Override
+                    public void done(byte[] data, ParseException e) {
+                        if (e == null) {
+                            Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+                            img.setImageBitmap(bmp);
+                        } else {
+                            Log.i(TAG, "Image was not set: " + e.getMessage());
+                        }
+                    }
+                });
+            } else {
+                Log.i(TAG, "File did not upload");
+                img.setImageResource(R.drawable.placeholder_image);
+            }
+        }// load image
 
 
         @Override

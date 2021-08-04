@@ -30,7 +30,7 @@ import java.util.Calendar;
 
 public class CreateEventActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private static final String TAG = "TestActivity";
+    private static final String TAG = "CreateEventActivity";
     private double latitude;
     private double longitude;
 
@@ -47,6 +47,7 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
     private AwesomeValidation awesomeValidation;
     private DatePickerDialog.OnDateSetListener MDateSetListener;
     private ParseFile file;
+    private Event event = new Event();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,8 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
                     String date = tvDate.getText().toString();
                     ParseUser currentUser = ParseUser.getCurrentUser();
                     saveEvent(name, campaign, date, location, max_participants, description, start, end, currentUser, latitude, longitude);
-                    goEventTimeLineActivity();
+//                    goEventTimeLineActivity();
+                    goImageEditorActivity();
                     Toast.makeText(getApplicationContext(), "Event Created", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Event Creation Failed", Toast.LENGTH_SHORT).show();
@@ -174,10 +176,17 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
         startActivity(i);
     }
 
+    private void goImageEditorActivity() {
+
+        Intent i = new Intent(CreateEventActivity.this, ImageEditorActivity.class);
+        i.putExtra("Event", event);
+        startActivity(i);
+    }
+
 
     private void saveEvent(String name, String campaign, String date, String location, String max_participants, String description, String start, String end, ParseUser host, double latitude, double longitude) {
 
-        Event event = new Event();
+//        Event event = new Event();
         event.setName(name);
         event.setCampaign(campaign);
         event.setDate(date);

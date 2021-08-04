@@ -10,13 +10,13 @@
     android:background="@color/black"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnFindEventCampaign"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="FIND AN EVENT BASED ON CAMPAIGN"
-        android:textColor="@color/black"
-        android:background="@drawable/round1"/>
+<!--    <Button-->
+<!--        android:id="@+id/btnFindEventCampaign"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="FIND AN EVENT BASED ON CAMPAIGN"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:background="@drawable/round1"/>-->
 
     <Button
         android:id="@+id/btnFindEventLocation"
@@ -37,13 +37,13 @@
         android:background="@drawable/round1"/>
 
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/round1"/>
+<!--    <Button-->
+<!--        android:id="@+id/btnLogout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Logout"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="@drawable/round1"/>-->
 
 </LinearLayout>

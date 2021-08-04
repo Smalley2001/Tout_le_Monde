@@ -9,7 +9,6 @@ import android.widget.Button;
 
 public class FindEventActivity extends AppCompatActivity {
 
-    private Button btnFindEventCampaign;
     private Button btnFindEventLocation;
     private Button btnFindAllEvents;
 
@@ -18,7 +17,6 @@ public class FindEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_event);
 
-        btnFindEventCampaign = findViewById(R.id.btnFindEventCampaign);
         btnFindEventLocation = findViewById(R.id.btnFindEventLocation);
         btnFindAllEvents = findViewById(R.id.btnFindAllEvents);
 
@@ -35,17 +33,11 @@ public class FindEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            }
-        });
-
-        btnFindEventCampaign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                goFindEventCampaignActivity();
+                goEventTimelineActivity();
 
             }
         });
+
     }
 
     private void goFindEventCampaignActivity() {
@@ -58,6 +50,13 @@ public class FindEventActivity extends AppCompatActivity {
     private void goDistanceActivity() {
 
         Intent i = new Intent(FindEventActivity.this, DistanceActivity.class);
+        startActivity(i);
+        //finish();
+    }
+
+    private void goEventTimelineActivity() {
+
+        Intent i = new Intent(FindEventActivity.this, EventTimelineActivity.class);
         startActivity(i);
         //finish();
     }
