@@ -89,7 +89,6 @@ public class TenMileFiltering extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "my events size: " + allEvents.size());
-//                queryEvents();
                 filter();
             }
         });
@@ -123,8 +122,6 @@ public class TenMileFiltering extends AppCompatActivity {
 
     private void filter() {
 
-//        queryEvents();
-
         ArrayList<Event> events = new ArrayList<>();
         for (Event event: allEvents) {
             if (event.getLatitude() != 0.0 && event.getLongitude() != 0.0) {
@@ -147,7 +144,6 @@ public class TenMileFiltering extends AppCompatActivity {
                 continue;
             }
         }
-//        queryEvents();
         hybridSort(events);
         Log.i(TAG, "my events size AFter filtering: " + events.size());
         Log.i(TAG, "New events lists after insertion sort: " + events.toString());
@@ -267,10 +263,7 @@ public class TenMileFiltering extends AppCompatActivity {
             partition(myEvents, 0, myEvents.size()-1);
         }
 
-
     }
-
-
 
 
     private void queryEvents() {
@@ -293,14 +286,8 @@ public class TenMileFiltering extends AppCompatActivity {
                     return;
                 }
 
-                // for debugging purposes let's print every event description to logcat
-//                for (Event event : events) {
-//                    Log.i(TAG, "Event: " + event.getDescription() + ", username: " + event.getHost().getUsername());
-//                }
-
                 // save received posts to list and notify adapter of new data
                 allEvents.addAll(events);
-//                adapter.notifyDataSetChanged();
 
             }
 
