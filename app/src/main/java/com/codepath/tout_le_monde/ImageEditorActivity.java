@@ -162,7 +162,7 @@ public class ImageEditorActivity extends AppCompatActivity {
 
                         ParseFile file = new ParseFile("image.png", byteArray);
                         Log.i(TAG, "File is: " + file);
-                        event.put("Image",file);
+                        event.setImage(file);
 
                         event.saveInBackground(new SaveCallback() {
                             @Override
