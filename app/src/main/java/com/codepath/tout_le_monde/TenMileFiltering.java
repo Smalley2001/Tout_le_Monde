@@ -123,6 +123,8 @@ public class TenMileFiltering extends AppCompatActivity {
 
     private void filter() {
 
+//        queryEvents();
+
         ArrayList<Event> events = new ArrayList<>();
         for (Event event: allEvents) {
             if (event.getLatitude() != 0.0 && event.getLongitude() != 0.0) {
@@ -146,7 +148,7 @@ public class TenMileFiltering extends AppCompatActivity {
             }
         }
 //        queryEvents();
-        insertionSort(events, 0, events.size()-1);
+        hybridSort(events);
         Log.i(TAG, "my events size AFter filtering: " + events.size());
         Log.i(TAG, "New events lists after insertion sort: " + events.toString());
         adapter.filterList(events);
@@ -218,6 +220,59 @@ public class TenMileFiltering extends AppCompatActivity {
         return filteredEvents;
     }
 
+
+    private int partition (List<Event> filteredEvents, int low, int high) {
+
+        Event pivot = filteredEvents.get(high);
+        int i = low;
+        int j = low;
+
+        while (i <= high) {
+
+            String name1 = filteredEvents.get(j).getName();
+            double distance1 = map.get(name1);
+            String name2 = filteredEvents.get(j+1).getName();
+            double distance2 = map.get(name2);
+
+            if (distance1 == distance2) {
+                // If name2 comes alphabetically before name1
+                if (name2.compareToIgnoreCase(name1) > 0) {
+                    i++;
+                }else {
+
+                    Event temp = filteredEvents.get(i);
+                    filteredEvents.set(i, filteredEvents.get(j));
+                    filteredEvents.set(j, temp);
+                    i++;
+                    j++;
+                }
+
+            } else {
+                i++;
+                continue;
+            }
+
+        }
+
+        return j;
+    }
+
+
+    private void hybridSort(List<Event> myEvents) {
+
+        if (myEvents.size() < 64) {
+
+            insertionSort(myEvents, 0, myEvents.size()-1);
+        } else {
+            partition(myEvents, 0, myEvents.size()-1);
+        }
+
+
+    }
+
+
+
+
     private void queryEvents() {
         // specify what type of data we want to query - Post.class
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
@@ -237,6 +292,11 @@ public class TenMileFiltering extends AppCompatActivity {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
+
+                // for debugging purposes let's print every event description to logcat
+//                for (Event event : events) {
+//                    Log.i(TAG, "Event: " + event.getDescription() + ", username: " + event.getHost().getUsername());
+//                }
 
                 // save received posts to list and notify adapter of new data
                 allEvents.addAll(events);
