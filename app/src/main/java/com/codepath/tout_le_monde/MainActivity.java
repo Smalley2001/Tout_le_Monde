@@ -130,13 +130,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        BtnSMS.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                goTestActivity();
-//            }
-//        });
-
     }
 
     public boolean isServicesOK() {
@@ -286,13 +279,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-    protected void goMapsActivity() {
-
-        // This function redirects to the Google Map Activity
-        // if button clicked
+    private void goMapsActivity() {
 
         Intent i = new Intent(MainActivity.this, GoogleMapsActivity.class);
         startActivity(i);
