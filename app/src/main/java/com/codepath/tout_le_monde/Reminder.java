@@ -112,9 +112,6 @@ public class Reminder extends BroadcastReceiver {
                     return;
                 }
 
-//                for (Event event : events) {
-//                    Log.i(TAG, "Event not signed up for: " + event.getName());
-//                }
                 notSignedUpEvents.addAll(events);
 
                 // Check which events are less than 20 miles away
