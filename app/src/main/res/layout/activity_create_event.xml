@@ -9,17 +9,27 @@
     android:background="@color/black"
     tools:context=".CreateEventActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Event Details"
+        android:textSize="40sp"
+        android:textColor="@color/sky"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_name"
         android:hint="Enter the Event Name"
         android:textColor="@color/black"
-        android:textColorHint="#808080"
+        android:textColorHint="@color/black"
         android:padding="10dp"
         android:inputType="textPersonName"
-        android:textSize="15sp"
-        android:background="@color/white" />
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:background="@color/sky" />
 
 
     <TextView
@@ -28,11 +38,11 @@
         android:id="@+id/tv_campaign"
         android:hint="Event Campaign"
         android:textColor="@color/black"
-        android:textColorHint="#808080"
+        android:textColorHint="@color/black"
         android:padding="10dp"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_marginTop="10dp"
-        android:background="@color/white" />
+        android:background="@color/sky" />
 
     <TextView
         android:layout_width="match_parent"
@@ -40,11 +50,11 @@
         android:id="@+id/tv_location"
         android:hint="Event Location"
         android:textColor="@color/black"
-        android:textColorHint="#808080"
+        android:textColorHint="@color/black"
         android:padding="10dp"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_marginTop="10dp"
-        android:background="@color/white" />
+        android:background="@color/sky" />
 
     <TextView
         android:layout_width="match_parent"
@@ -52,34 +62,33 @@
         android:id="@+id/tv_date"
         android:hint="Click Here to Enter the Date"
         android:textColor="@color/black"
-        android:textColorHint="#808080"
+        android:textColorHint="@color/black"
         android:padding="10dp"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_marginTop="10dp"
-        android:background="@color/white" />
-
+        android:background="@color/sky" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:id="@+id/starting_spinner"
-        android:background="@color/white"
+        android:background="@color/sky"
         android:textColor="@color/black"
         android:textColorHint="#808080"
-        android:popupBackground="@color/white"
+        android:popupBackground="@color/sky"
         android:layout_marginTop="10dp"
-        android:textSize="15sp" />
+        android:textSize="20sp" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:id="@+id/ending_spinner"
-        android:background="@color/white"
+        android:background="@color/sky"
         android:textColor="@color/black"
         android:textColorHint="#808080"
-        android:popupBackground="@color/white"
+        android:popupBackground="@color/sky"
         android:layout_marginTop="10dp"
-        android:textSize="15sp" />
+        android:textSize="20sp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -88,31 +97,33 @@
         android:hint="Enter Maximum Participants or Enter N/A"
         android:padding="10dp"
         android:textColor="@color/black"
-        android:textColorHint="#808080"
-        android:textSize="15sp"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
         android:layout_marginTop="10dp"
-        android:background="@color/white" />
+        android:background="@color/sky" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_description"
         android:textColor="@color/black"
-        android:textColorHint="#808080"
+        android:textColorHint="@color/black"
         android:hint="Enter Event Description"
         android:padding="10dp"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_marginTop="10dp"
-        android:background="@color/white" />
+        android:background="@color/sky" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/btn_Submit_Event"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:text="Submit"
-        android:background="@color/white" />
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:background="@color/sky" />
 
 
 </LinearLayout>

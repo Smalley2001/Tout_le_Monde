@@ -135,10 +135,10 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
 
 
         // Set up Spinner
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this, R.array.times, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this, R.array.endTimes, android.R.layout.simple_spinner_item);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         endSpin.setAdapter(adapter3);
-//
+
 //        // Set listener for spinner
         endSpin.setOnItemSelectedListener(this);
 
@@ -158,9 +158,10 @@ public class CreateEventActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
-
+        if (position != 0) {
+            String text = parent.getItemAtPosition(position).toString();
+            Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
