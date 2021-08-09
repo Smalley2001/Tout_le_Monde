@@ -17,7 +17,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button btnStart;
     SliderView sliderView;
     int [] images = {R.drawable.metoo,R.drawable.blackl, R.drawable.asianhate, R.drawable.lgbtq_slide,
-            R.drawable.together};
+            R.drawable.palestine, R.drawable.together};
 
     SliderAp sliderAp;
 
