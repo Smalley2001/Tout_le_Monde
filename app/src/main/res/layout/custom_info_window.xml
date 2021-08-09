@@ -19,7 +19,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="#000"
-            android:textSize="14sp"
+            android:textSize="20sp"
+            android:text="Title"
             android:textStyle="bold" />
 
         <TextView
@@ -27,8 +28,9 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="10"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textColor="#000"
+            android:text="Snippet"
             android:id="@+id/custom_snippet"/>
 
     </LinearLayout>
