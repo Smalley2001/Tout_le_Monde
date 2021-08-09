@@ -3,16 +3,21 @@ package com.codepath.tout_le_monde;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.DeleteCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -34,6 +39,7 @@ public class CreatedEventDetailsActivity extends AppCompatActivity {
     private TextView EventEnd;
     private TextView EventMax;
     private TextView EventAvailable;
+    private ImageView EventPhoto;
     private static final String TAG = "EventDetailsActivity";
     private ParseUser user;
 
@@ -53,6 +59,7 @@ public class CreatedEventDetailsActivity extends AppCompatActivity {
         EventMax = findViewById(R.id.created_details_event_max);
         EventDate = findViewById(R.id.created_details_event_date);
         EventAvailable = findViewById(R.id.created_details_event_available);
+        EventPhoto = findViewById(R.id.created_details_event_image);
 
         event = Parcels.unwrap(getIntent().getParcelableExtra("X"));
         user = Parcels.unwrap(getIntent().getParcelableExtra("U"));
@@ -72,7 +79,7 @@ public class CreatedEventDetailsActivity extends AppCompatActivity {
                         } else {
                             Log.d(TAG, "Event Deleted Successfully");
                             Toast.makeText(getApplicationContext(), "Event Deleted Successfully", Toast.LENGTH_SHORT).show();
-                            goMyCreatedEventsActivity();
+                            goMainActivity();
                         }
                     }
                 });
@@ -89,9 +96,9 @@ public class CreatedEventDetailsActivity extends AppCompatActivity {
 
     }
 
-    private void goMyCreatedEventsActivity() {
+    private void goMainActivity() {
 
-        Intent intent = new Intent(getApplicationContext(), MyCreatedEventsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -130,10 +137,11 @@ public class CreatedEventDetailsActivity extends AppCompatActivity {
 
     private void bindFields(String available_spots) throws ParseException {
 
-        String name = "Event Name: " + event.getName();
+        String name = event.getName();
         String campaign = "Event Campaign: " + event.getCampaign();
-        String description = "Event Description: " + event.getDescription();
+        String description = event.getDescription();
         String max = "Apples";
+        ParseFile file = event.getImage();
 
         if (event.getMaxParticipants() != null) {
             max = "Maximum Participants: " + event.getMaxParticipants();
@@ -162,5 +170,28 @@ public class CreatedEventDetailsActivity extends AppCompatActivity {
         EventEnd.setText(end);
         EventAvailable.setText(available);
         EventHost.setText(host);
+
+        loadImages(file, EventPhoto);
     }
+
+
+    private void loadImages(ParseFile thumbnail, final ImageView img) {
+
+        if (thumbnail != null) {
+            thumbnail.getDataInBackground(new GetDataCallback() {
+                @Override
+                public void done(byte[] data, ParseException e) {
+                    if (e == null) {
+                        Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+                        img.setImageBitmap(bmp);
+                    } else {
+                        Log.i(TAG, "Image was not set: " + e.getMessage());
+                    }
+                }
+            });
+        } else {
+            Log.i(TAG, "File did not upload");
+            img.setImageResource(R.drawable.placeholder_image);
+        }
+    }// load image
 }
