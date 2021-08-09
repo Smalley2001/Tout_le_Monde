@@ -26,7 +26,6 @@ public class CampaignRecyclerActivity extends AppCompatActivity {
     Button btnAdd;
     EditText etItem;
     RecyclerView rvItems;
-    ItemsAdapter itemsAdapter;
     public static final String TAG = "CampaignRecycler";
 
 
@@ -70,6 +69,7 @@ public class CampaignRecyclerActivity extends AppCompatActivity {
                 items.add(todoItem);
                 // Notify the adapter that an item has been inserted
                 itemsAdapter.notifyItemInserted(items.size() - 1);
+                // Reset the edit Text to empty
                 etItem.setText("");
                 Toast.makeText(getApplicationContext(), "Item was added", Toast.LENGTH_SHORT).show();
                 saveItems();

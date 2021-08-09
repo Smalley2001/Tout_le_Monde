@@ -7,13 +7,27 @@
     tools:context=".CampaignRecyclerActivity">
 
     <Button
+        android:id="@+id/Details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:background="@color/blue"
+        android:layout_marginBottom="0dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="Select a campaign for your Event" />
+
+    <Button
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="0dp"
+        android:background="@color/blue"
         android:layout_marginBottom="0dp"
+        android:textSize="20sp"
         android:text="Add" />
 
     <EditText
@@ -25,19 +39,25 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp"
+        android:background="@color/black"
         android:layout_toStartOf="@+id/btnAdd"
         android:ems="10"
-        android:hint="Add an item here!"
+        android:hint="Add a campaign here!"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         android:inputType="none" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvItems"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="616dp"
         android:layout_above="@+id/etItem"
+        android:layout_below="@id/Details"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp" />
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/sky" />
 </RelativeLayout>
