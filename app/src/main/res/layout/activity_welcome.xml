@@ -9,13 +9,17 @@
 
     <Button
         android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="50dp"
+        android:background="@color/sky"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         android:text="Let's Get Started" />
 
     <com.smarteist.autoimageslider.SliderView
@@ -30,6 +34,6 @@
         app:sliderIndicatorSelectedColor="#636363"
         app:sliderAnimationDuration="1000"
         app:sliderIndicatorOrientation="horizontal"
-        app:sliderIndicatorGravity="center_horizontal|bottom" />
+        app:sliderIndicatorGravity="center_horizontal|top" />
 
 </RelativeLayout>
