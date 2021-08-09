@@ -20,6 +20,9 @@ import java.util.List;
 @ParseClassName("Event")
 public class Event extends ParseObject {
 
+    // Access the names of the fields inside of the Parse object
+    // and store them in variables
+
     public static final String KEY_OBJECT_ID = "objectId";
     public static final String KEY_NAME = "Name";
     public static final String KEY_CAMPAIGN = "Campaign";
@@ -41,6 +44,8 @@ public class Event extends ParseObject {
     public Event() {
 
     }
+
+    // Set getters and setters to retrieve from Parse or update Parse
 
     public String getId() {
         return getString(KEY_OBJECT_ID);
@@ -159,8 +164,4 @@ public class Event extends ParseObject {
     }
     public int getParticipantsCount() { return getInt("Participants_Count"); }
     public void setParticipantsCount(int count) { put("Participants_Count", count); }
-
-
-
-
 }
