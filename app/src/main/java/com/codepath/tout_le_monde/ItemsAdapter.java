@@ -1,5 +1,7 @@
 package com.codepath.tout_le_monde;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -65,6 +68,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 
         public void bind(String item) {
             // Update the View inside of the folder with this data
+            tvitem.setTextColor(Color.parseColor("#000000"));
+            tvitem.setTextSize(30);
             tvitem.setText(item);
             tvitem.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
