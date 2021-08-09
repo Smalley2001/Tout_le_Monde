@@ -35,7 +35,7 @@ public class MyCreatedEventsActivity extends EventTimelineActivity {
         rvMyEvents.setAdapter(myadapter);
         // set the layout manager on the recycler view
         rvMyEvents.setLayoutManager(new LinearLayoutManager(this));
-        // query posts from EventTimeline
+        // query events from EventTimeline
         queryEvents();
     }
 
@@ -45,11 +45,11 @@ public class MyCreatedEventsActivity extends EventTimelineActivity {
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
         // include data referred by user key
         query.include(Event.KEY_HOST);
-        // limit query to latest 20 items
+        // limit query to latest 50 items
         query.whereEqualTo(Event.KEY_HOST, ParseUser.getCurrentUser());
 
-        query.setLimit(20);
-        // order posts by creation date (newest first)
+        query.setLimit(50);
+        // order events by creation date (newest first)
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for events
         query.findInBackground(new FindCallback<Event>() {

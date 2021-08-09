@@ -37,7 +37,7 @@ public class MySignedUpEventsActivity extends EventTimelineActivity {
         rvMyEvents.setAdapter(myadapter);
         // set the layout manager on the recycler view
         rvMyEvents.setLayoutManager(new LinearLayoutManager(this));
-        // query posts from EventTimeline
+        // query events from EventTimeline
         queryEvents();
     }
 
@@ -49,8 +49,8 @@ public class MySignedUpEventsActivity extends EventTimelineActivity {
         query.include(Event.KEY_PARTICIPANTS);
         query.whereEqualTo(Event.KEY_PARTICIPANTS, ParseUser.getCurrentUser());
 
-        query.setLimit(20);
-        // order posts by creation date (newest first)
+        query.setLimit(50);
+        // order events by creation date (newest first)
         query.addDescendingOrder("createdAt");
 
         query.findInBackground(new FindCallback<Event>() {
