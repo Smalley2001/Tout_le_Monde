@@ -139,9 +139,9 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     private void bindFields(String available_spots) throws ParseException {
 
-        String name = "Event Name: " + event.getName();
+        String name = event.getName();
         String campaign = "Event Campaign: " + event.getCampaign();
-        String description = "Event Description: " + event.getDescription();
+        String description = event.getDescription();
         String max = "Apples";
 
         if (event.getMaxParticipants() != null) {
