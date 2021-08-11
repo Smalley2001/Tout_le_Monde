@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +75,11 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     public int getItemCount() {
         return events.size();
     }
+
+    // filterList is a function used for the location filtering algorithm
+    // that takes a list of events (in this case the events to be displayed based on location
+    // and sets that equal to the list in the adapter. Now with new data, we must notify the
+    // adapter.
 
     public void filterList (List<Event> mEvents) {
         events = mEvents;
@@ -166,13 +172,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
                 Event event = events.get(position);
 
-                Log.i(TAG, event.getName());
-
-                Log.d(TAG, context.getClass().toString());
-
                 String host = event.getHost().getUsername();
                 Log.i(TAG, "Host is : " + host);
-
                 Log.i(TAG, context.getClass().toString());
 
                 if (context.getClass().toString().equals("class com.codepath.tout_le_monde.EventTimelineActivity")) {
@@ -195,13 +196,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
                     intent.putExtra("X", Parcels.wrap(event));
                     intent.putExtra("U", Parcels.wrap(event.getHost()));
                     context.startActivity(intent);
-                }
-
-
-                else {
+                } else {
 
                     Intent intent = new Intent(context, EventDetailsActivity.class);
-//                intent.putExtra("Host", host);
                     intent.putExtra("Context_Name", context.getClass().toString());
                     intent.putExtra("X", Parcels.wrap(event));
                     intent.putExtra("U", Parcels.wrap(event.getHost()));
