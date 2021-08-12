@@ -55,7 +55,7 @@ public class ImageEditorActivity extends AppCompatActivity {
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goEventTimeLineActivity();
+                goMainActivity();
             }
         });
 
@@ -186,9 +186,9 @@ public class ImageEditorActivity extends AppCompatActivity {
         }
     }
 
-    private void goEventTimeLineActivity() {
+    private void goMainActivity() {
 
-        Intent i = new Intent(ImageEditorActivity.this, EventTimelineActivity.class);
+        Intent i = new Intent(ImageEditorActivity.this, MainActivity.class);
         startActivity(i);
     }
 
