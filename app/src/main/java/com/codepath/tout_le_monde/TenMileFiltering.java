@@ -20,7 +20,9 @@ import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +43,6 @@ public class TenMileFiltering extends AppCompatActivity {
     private double userLatitude;
     private double userLongitude;
     private Button btnTenSubmit;
-    private String userAddress;
     private HashMap<String, Double> map = new HashMap<String, Double>();
 
     @Override
@@ -132,6 +133,7 @@ public class TenMileFiltering extends AppCompatActivity {
                 double distanceInMiles = kmToMilesConverter(distance);
 
                 if (isLessThan10MileDistance(distanceInMiles)) {
+
                     events.add(event);
                     Log.i(TAG, "Event name: " + event.getName() + " Address: " + event.getLocation());
                     Log.i(TAG, "Event Latitude: " + event.getLatitude());
@@ -144,7 +146,7 @@ public class TenMileFiltering extends AppCompatActivity {
                 continue;
             }
         }
-        hybridSort(events);
+        insertionSort(events, 0, events.size()-1);
         Log.i(TAG, "my events size AFter filtering: " + events.size());
         Log.i(TAG, "New events lists after insertion sort: " + events.toString());
         adapter.filterList(events);
@@ -216,6 +218,7 @@ public class TenMileFiltering extends AppCompatActivity {
         return filteredEvents;
     }
 
+    // Used for quick sort
 
     private int partition (List<Event> filteredEvents, int low, int high) {
 
@@ -271,8 +274,8 @@ public class TenMileFiltering extends AppCompatActivity {
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
         // include data referred by user key
         query.include(Event.KEY_HOST);
-        // limit query to latest 20 items
-        query.setLimit(20);
+        // limit query to latest 30 items
+        query.setLimit(30);
         // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for posts
