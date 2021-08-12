@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     android:layout_height="match_parent"
     tools:context=".TenMileFiltering">
 
@@ -13,6 +14,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/tenMileSearch"
         android:hint="Enter Address, City, or Zip Code"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         android:imeOptions="actionSearch"
         />
 
@@ -20,6 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tenButtonSubmit"
+        android:background="@color/blue"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
         android:text="Submit"
         />
 
@@ -27,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/tenRecycler"
-        android:background="@android:color/darker_gray"
+        android:background="@color/sky"
         android:padding="4dp"
         android:scrollbars="vertical" />
 
