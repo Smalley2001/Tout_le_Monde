@@ -69,10 +69,7 @@ public class Reminder extends BroadcastReceiver {
 
         Log.i(TAG, "received lat is: " + userLat);
         Log.i(TAG, "received long is: " + userLong);
-
-
         queryNotSignedUpEvents();
-
     }
 
     private void sendSMS(String number, String message) {
@@ -97,8 +94,8 @@ public class Reminder extends BroadcastReceiver {
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
         // include data referred by user key
         query.include(Event.KEY_PARTICIPANTS);
+        // Only get events where the User is not signed up
         query.whereNotEqualTo(Event.KEY_PARTICIPANTS, ParseUser.getCurrentUser());
-
         query.setLimit(20);
         // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
@@ -192,57 +189,6 @@ public class Reminder extends BroadcastReceiver {
         double mileDistance = 0.621371 * kmDistance;
 
         return mileDistance;
-    }
-
-
-    private double convertHoursToMilliseconds (double hours) {
-
-        double minutes = hours * 60;
-        double seconds = minutes * 60;
-        double milliseconds = seconds * 1000;
-        return milliseconds;
-
-    }
-
-    private double convertMinutesToMilliseconds (double minutes) {
-
-        double seconds = minutes * 60;
-        double milliseconds = seconds * 1000;
-        return milliseconds;
-
-    }
-
-    private void contactUser(ParseUser user) {
-
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("objectId", user.getObjectId());
-        query.getFirstInBackground(new GetCallback<ParseUser>() {
-            @Override
-            public void done(ParseUser object, ParseException e) {
-
-                if (e != null) {
-                    Log.i(TAG, "Could not find User");
-                } else {
-                    String phoneNumber = object.getString("PhoneNumber");
-                    Log.i(TAG, "Username is: " + object.getUsername() + " Phone Number: " + phoneNumber);
-                }
-            }
-        });
-
-    }
-
-    private void queryUsers() {
-
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.findInBackground(new FindCallback<ParseUser>() {
-            @Override
-            public void done(List<ParseUser> objects, ParseException e) {
-                for (ParseUser object: objects) {
-                    users = objects;
-                    Log.i(TAG, "Username is: " + object.getUsername());
-                }
-            }
-        });
     }
 
 }
