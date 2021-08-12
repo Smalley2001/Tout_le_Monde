@@ -43,42 +43,35 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Constants
+    // Constants
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    int PERMISSION_ID = 44;
 
-    //Variables
+    // Variables
     private Button btnLogout;
     private Button btnCreateEvent;
     private Button btnFindEvent;
     private Button btnMyCreatedEvents;
     private Button BtnMySignedUpEvents;
-//    private Button BtnSMS;
-    private TextView tvHelloUser;
 
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private Boolean LocationPermissionsGranted = false;
     private FusedLocationProviderClient mFusedLocationClient;
-    int PERMISSION_ID = 44;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvHelloUser = findViewById(R.id.helloUser);
         btnLogout = findViewById(R.id.btnLogout);
         btnCreateEvent = findViewById(R.id.btnCreateEvent);
         btnFindEvent = findViewById(R.id.btnFindEvent);
         btnMyCreatedEvents = findViewById(R.id.btnMyEvents);
         BtnMySignedUpEvents = findViewById(R.id.btnSignedUpEvents);
-//        BtnSMS = findViewById(R.id.btnSMS);
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        String text = "Hello " + currentUser.getUsername();
-        tvHelloUser.setText(text);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -87,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
         if (isServicesOK()) {
 
             Log.i("isServicesOK", "Everything is fine");
-//            getLocationPermission();
         }
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         btnCreateEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //goCreateEventActivity();
                 goMapsActivity();
             }
         });
@@ -141,13 +132,13 @@ public class MainActivity extends AppCompatActivity {
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
 
         if (available == ConnectionResult.SUCCESS) {
-            //everything is fine and the user can make map requests
+            // everything is fine and the user can make map requests
             Log.d(TAG, "isServicesOK: Google Play Services is Working");
             return true;
         }
 
         else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
-            //an error occured but we can resolve it
+            // an error occured but we can resolve it
 
             Log.d(TAG, "isServcesOK: an error occured but we can fix it");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
@@ -210,7 +201,6 @@ public class MainActivity extends AppCompatActivity {
                             Log.i(TAG, "Location latitude is: " + location.getLatitude());
                             Log.i(TAG, "UserLat is: " + lat);
                             setAlarm(lat, longitude);
-
                         }
                     }
                 });
@@ -266,8 +256,6 @@ public class MainActivity extends AppCompatActivity {
 
                 long timeAtButtonClick = System.currentTimeMillis();
 
-//                long OneMinuteInMillis = 1000 *5;
-
                 alarmManager.set(AlarmManager.RTC_WAKEUP,
                         timeAtButtonClick,
                         pendingIntent);
@@ -283,21 +271,18 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i = new Intent(MainActivity.this, GoogleMapsActivity.class);
         startActivity(i);
-        //finish();
     }
 
     private void goFindEventActivity() {
 
         Intent i = new Intent(MainActivity.this, FindEventActivity.class);
         startActivity(i);
-        //finish();
     }
 
     private void goMyCreatedEventsActivity() {
 
         Intent i = new Intent(MainActivity.this, MyCreatedEventsActivity.class);
         startActivity(i);
-        //finish();
     }
 
     private void goWelcomeActivity() {
@@ -311,30 +296,6 @@ public class MainActivity extends AppCompatActivity {
     private void goMySignedUpEventsActivity() {
 
         Intent i = new Intent(MainActivity.this, MySignedUpEventsActivity.class);
-        startActivity(i);
-    }
-
-    private void goCameraActivity() {
-
-        Intent i = new Intent(MainActivity.this, CameraActivity.class);
-        startActivity(i);
-    }
-
-    private void goImageEditorActivity() {
-
-        Intent i = new Intent(MainActivity.this, ImageEditorActivity.class);
-        startActivity(i);
-    }
-
-    private void goSendSMSActivity() {
-
-        Intent i = new Intent(MainActivity.this, SendSMSActivity.class);
-        startActivity(i);
-    }
-
-    private void goTestActivity() {
-
-        Intent i = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(i);
     }
 }
