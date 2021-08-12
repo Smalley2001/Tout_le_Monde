@@ -19,10 +19,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Event Name"
-        android:textColor="@color/white"
+        android:textColor="@color/sky"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
+        android:textSize="40sp"
         android:id="@+id/tvEventName" />
 
     <TextView
@@ -30,14 +31,15 @@
         android:layout_height="wrap_content"
         android:text="Date"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
         android:id="@+id/tvDate" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Start Time"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textColor="@color/white"
         android:id="@+id/tvStart" />
 
@@ -45,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="End Time"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textColor="@color/white"
         android:id="@+id/tvEnd" />
 
@@ -53,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Campaign"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textColor="@color/white"
         android:id="@+id/gotCampaign" />
 
@@ -61,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Location"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textColor="@color/white"
         android:id="@+id/tvEventLocation" />
 
@@ -70,7 +72,7 @@
         android:layout_height="wrap_content"
         android:text="Host"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:id="@+id/tvHost" />
 
     <TextView
@@ -78,7 +80,7 @@
         android:layout_height="wrap_content"
         android:text="Description Title"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textColor="@color/white"
         android:id="@+id/tvDescriptionTitle" />
 
@@ -86,7 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Description"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textColor="@color/white"
         android:id="@+id/tvDescription" />
 </LinearLayout>
