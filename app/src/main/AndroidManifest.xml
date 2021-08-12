@@ -18,17 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tout_le_Monde">
-        <activity android:name=".TestMain"></activity>
-        <activity android:name=".TestingActivity" />
         <activity android:name=".YouTubeActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".TwentyFiveMileFiltering" />
         <activity android:name=".ImageEditorActivity" />
-        <activity android:name=".ExampleActivity" />
         <activity android:name=".SendSMSActivity" />
         <activity android:name=".TenMileFiltering" />
-        <activity android:name=".unused.CameraActivity" />
         <activity android:name=".SignedUpEventDetailsActivity" />
         <activity android:name=".CreateEventActivity" />
         <activity android:name=".CreatedEventDetailsActivity" />
