@@ -46,7 +46,7 @@ public class EventTimelineActivity extends AppCompatActivity {
         // include data referred by user key
         query.include(Event.KEY_HOST);
         // limit query to latest 20 items
-        query.setLimit(20);
+        query.setLimit(30);
         // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for posts
